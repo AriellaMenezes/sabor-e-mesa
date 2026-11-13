@@ -2,6 +2,10 @@
 
 Projeto demonstrativo de site para restaurante/café fictício, desenvolvido para portfólio freelance.
 
+## Prévia do projeto
+
+![Página inicial do Sabor & Mesa](sabor-e-mesa-home.png)
+
 ## Funcionalidades
 - Página inicial e apresentação do estabelecimento
 - Cardápio digital com filtros por categoria
