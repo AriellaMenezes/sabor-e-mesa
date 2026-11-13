@@ -4,7 +4,7 @@ Projeto demonstrativo de site para restaurante/café fictício, desenvolvido par
 
 ## Prévia do projeto
 
-![Página inicial do Sabor & Mesa](sabor-e-mesa-home.png)
+![Página inicial do Sabor & Mesa](sabor_e_mesa.JPG)
 
 ## Funcionalidades
 - Página inicial e apresentação do estabelecimento
