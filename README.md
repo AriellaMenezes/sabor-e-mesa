@@ -6,6 +6,8 @@ Projeto demonstrativo de site para restaurante/café fictício, desenvolvido par
 
 ![Página inicial do Sabor & Mesa](sabor_e_mesa.JPG)
 
+🌐 **Acesse o site:** https://ariellamenezes.github.io/sabor-e-mesa/
+
 ## Funcionalidades
 - Página inicial e apresentação do estabelecimento
 - Cardápio digital com filtros por categoria
