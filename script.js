@@ -1,0 +1,15 @@
+const toggle=document.querySelector('#menuToggle'),nav=document.querySelector('#nav');
+toggle.addEventListener('click',()=>{nav.classList.toggle('nav-open');toggle.setAttribute('aria-expanded',nav.classList.contains('nav-open'));});
+nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>nav.classList.remove('nav-open')));
+document.querySelectorAll('.filter').forEach(btn=>btn.addEventListener('click',()=>{document.querySelector('.filter.active')?.classList.remove('active');btn.classList.add('active');document.querySelectorAll('.card').forEach(card=>card.classList.toggle('hidden',btn.dataset.filter!=='todos'&&card.dataset.category!==btn.dataset.filter));}));
+const cart=[],panel=document.querySelector('#cartPanel'),items=document.querySelector('#cartItems'),count=document.querySelector('#cartCount'),total=document.querySelector('#total'),toast=document.querySelector('#toast');
+const money=n=>n.toLocaleString('pt-PT',{style:'currency',currency:'EUR'});
+function notify(msg){toast.textContent=msg;toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),2100);}
+function render(){count.textContent=cart.reduce((s,x)=>s+x.qty,0);total.textContent=money(cart.reduce((s,x)=>s+x.price*x.qty,0));if(!cart.length){items.innerHTML='<p>Seu pedido ainda está vazio. Que tal escolher algo gostoso?</p>';return;}items.innerHTML=cart.map((x,i)=>`<div class="cart-item"><div><b>${x.name}</b><small>${x.qty} × ${money(x.price)}</small></div><div><b>${money(x.price*x.qty)}</b><br><button data-remove="${i}">Remover</button></div></div>`).join('');items.querySelectorAll('[data-remove]').forEach(b=>b.addEventListener('click',()=>{cart.splice(Number(b.dataset.remove),1);render();}));}
+document.querySelectorAll('.add').forEach(btn=>btn.addEventListener('click',()=>{const c=btn.closest('.card'),found=cart.find(x=>x.name===c.dataset.name);found?found.qty++:cart.push({name:c.dataset.name,price:Number(c.dataset.price),qty:1});render();notify(c.dataset.name+' adicionado ao pedido');}));
+function openCart(){panel.classList.add('open');panel.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';}
+function closeCart(){panel.classList.remove('open');panel.setAttribute('aria-hidden','true');document.body.style.overflow='';}
+document.querySelector('#cartOpen').addEventListener('click',openCart);document.querySelector('#closeCart').addEventListener('click',closeCart);document.querySelector('#backdrop').addEventListener('click',closeCart);
+document.querySelector('#checkout').addEventListener('click',()=>notify(cart.length?'Demonstração: pedido não enviado.':'Adicione produtos antes de finalizar.'));
+const date=document.querySelector('#date'),now=new Date();date.min=`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;
+document.querySelector('#reservationForm').addEventListener('submit',e=>{e.preventDefault();const name=new FormData(e.currentTarget).get('name');document.querySelector('#feedback').textContent=`Obrigado, ${name}! Solicitação demonstrativa preenchida. Nenhuma reserva real foi enviada.`;e.currentTarget.reset();});
